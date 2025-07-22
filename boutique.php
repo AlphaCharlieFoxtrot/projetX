@@ -2,21 +2,45 @@
 require_once('includes/pdo.php');
 require_once('includes/config.php');
 
-if (empty($_GET['search'])) {
-    $sql = "SELECT * FROM `produits`";
+$search = $_GET['search'] ?? '';
+
+$page = isset($_GET['page']) ? intval($_GET['page']) :1;
+$limit = 5;
+$offset = ($page-1)* $limit;
+
+$url = '?' ;
+
+if(!empty($search)){
+    $sql = 'SELECT * FROM produits WHERE nom LIKE :search OR description LIKE :search LIMIT :limit OFFSET :offset';
     $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
     $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} else {
-    $search = '%' . $_GET['search'] . '%';
 
-    $sql = 'SELECT * FROM `produits` WHERE description LIKE :search OR nom LIKE :search';
+    $countSql = 'SELECT COUNT(*) FROM produits WHERE nom LIKE :search OR description LIKE :search';
+    $countStmt = $pdo->prepare($countSql);
+    $countStmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+    $countStmt->execute();
+    $total = $countStmt->fetchColumn();
+
+    $titre = count($produits) . ' produits trouvés pour: ' . $search;
+}else{
+    $sql = 'SELECT * FROM produits LIMIT :limit OFFSET :offset';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['search' => $search]);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
     $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $total = $pdo->query('SELECT COUNT(*) FROM produits')->fetchColumn();
+
+    $titre = 'Bienvenue dans notre boutique';
 }
 
-$titre = empty($_GET["search"]) ? "Tous les produits" : 'Produits contenant "' . htmlspecialchars($_GET["search"]) . '"';
+$nbPages = ceil($total/$limit);
+
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +53,7 @@ $titre = empty($_GET["search"]) ? "Tous les produits" : 'Produits contenant "' .
 </head>
 
 <body>
+    <?php include(BASE_URL . 'includes.php/header.php'); ?>
     <h1>Bienvenue</h1>
     <section class="catalogue">
         <?php
@@ -53,6 +78,20 @@ $titre = empty($_GET["search"]) ? "Tous les produits" : 'Produits contenant "' .
             </div>
         <?php endforeach; ?>
     </section>
+    <article class="pagination">
+        <?php for($i=1;$i<=$nbPages;$i++): ?>
+            <?php $link = '?'; ?>
+            <?php if(!empty($search)):?>
+                <?php $link .= 'search=' . urlencode($search) . '&';?>
+            <?php endif; ?>
+            <?php $link .= 'page=' . $i; ?>
+            <?php if($i == $page): ?>
+                <?= '<strong>' . $i . ' </strong>'; ?>
+            <?php else: ?>
+                <?= '<a href="' . $link . '">' . $i . ' </a>'; ?>
+            <?php endif; ?>
+        <?php endfor; ?>
+    </article>
 </body>
 
 </html>

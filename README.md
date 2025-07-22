@@ -1,7 +1,7 @@
 ✅ Check-list du projet e-commerce
 ✅ Fait ?	Tâche	Fait le :	Notes
-⬜	Créer la table produits dans ta BDD		
-⬜	Insérer 10-20 produits fictifs		
+⬜	Créer la table produits dans ta BDD		Tâche	Fait le :	07/07/25		
+⬜	Insérer 10-20 produits fictifs		Tâche	Fait le :	07/07/25
 ⬜	Faire boutique.php pour afficher la grille		
 ⬜	Mettre un CSS rapide pour la boutique		
 ⬜	Faire produit.php pour détails + bouton panier		
