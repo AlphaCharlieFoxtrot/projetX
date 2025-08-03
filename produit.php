@@ -87,6 +87,7 @@ $produitSimilaire = $similarStmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- ✅ Formulaire ajout au panier -->
                 <form action="ajouter_panier.php" method="POST" class="product-actions">
                     <input type="hidden" name="id" value="<?= $produitId ?>">
+                    <input type="number" name="quantite" value="1" min="1" max="100" class="product-quantity">
                     <button type="submit" class="btn-add-to-cart">Ajouter au panier</button>
                     <button type="button" class="btn-buy-now">Acheter maintenant</button>
                 </form>
