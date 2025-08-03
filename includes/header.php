@@ -5,10 +5,6 @@
             <li><a href="boutique.php">Boutique</a></li>
         </ul>
     </nav>
-    <form method="get">
-        <input type="text" name="search" placeholder="Rechercher...">
-        <input type="submit" value="Rechercher">
-    </form>
     <?php if (isset($_SESSION['user'])) : ?>
         <div class="user-info">
             <p>Bonjour, <?= $_SESSION['user']['username'] ?></p>

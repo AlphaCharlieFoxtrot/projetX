@@ -2,10 +2,6 @@
     require_once('includes/pdo.php');
     require_once('includes/config.php');
 
-    $sql = "SELECT * FROM `aLaUne`";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +11,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php include_once 'includes/header.php'; ?>
     <section class="banner">
         <img src="/" alt="banner image" class="banner-image">
         <h1>Welcome to Projet X</h1>
@@ -23,11 +20,11 @@
         <h2>Project Overview</h2>
         <p>This is a brief overview of Projet X. Here you can find all the necessary information about the project.</p>
         <article class="conteiner_carroussel nouveau">
-            <?php foreach ($news as $new)://sous controle dashboard admin -> table aLaUne à créer(date créattion: pas de date? = no table aLaUne) //nouveauté a l'affiche ?>
+            <?php /* foreach ($news as $new)://sous controle dashboard admin -> table aLaUne à créer(date créattion: pas de date? = no table aLaUne) //nouveauté a l'affiche ?>
                 <h3><?= $new['titre'] ?></h3>
                 <p><?= $new['description'] ?></p>
                 <a href="/index.php" class="btn">Read More</a>
-            <?php endforeach; ?>
+            <?php endforeach; */?>
         </article>
         <article class="conteiner_ctg femmes">
             <div class="card_ctg">
@@ -45,6 +42,7 @@
             <div class="card_ctg accessoires">
                 <h3>Card Title 4</h3>
                 <p>This is a description of the fourth card. It offers more information about the project.</p>
+            </div>
         </article>
     </section>
 </body>
