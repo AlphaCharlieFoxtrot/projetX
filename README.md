@@ -2,14 +2,14 @@
 ✅ Fait ?	Tâche	Fait le :	Notes
 ⬜	Créer la table produits dans ta BDD		Tâche	Fait le :	07/07/25		
 ⬜	Insérer 10-20 produits fictifs		Tâche	Fait le :	07/07/25
-⬜	Faire boutique.php pour afficher la grille		
+⬜	Faire boutique.php pour afficher la grille		Tâche	Fait le :03/08/25		
 ⬜	Mettre un CSS rapide pour la boutique		
-⬜	Faire produit.php pour détails + bouton panier		
+⬜	Faire produit.php pour détails + bouton panier		Tâche	Fait le :03/08/25
 ⬜	Créer le panier.php pour invité (sessions)		
 ⬜	Ajouter login.php / register.php		
 ⬜	Gérer panier connecté (liens à user_id)		
-⬜	Ajouter filtres et tri sur boutique.php		
-⬜	Rendre les filtres instantanés (AJAX)		
+⬜	Ajouter filtres et tri sur boutique.php		Tâche	Fait le :03/08/25
+⬜	Rendre les filtres instantanés (AJAX)		Tâche	Fait le :03/08/25
 ⬜	Créer table favoris + logique cœur		
 ⬜	Faire le hover sexy (2ᵉ image ou info)		
 ⬜	Créer checkout.php avec adresse + récap		
