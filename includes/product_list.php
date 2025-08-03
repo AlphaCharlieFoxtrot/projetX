@@ -1,13 +1,16 @@
 <?php foreach ($produits as $produit): ?>
             <div class="produit">
-                <img src="img/<?= $produit['image'] ?>" alt="image du produit">
+                <img src="img/<?= $produit['img_url'] ?>" alt="image du produit">
                 <h3><?= $produit['nom'] ?></h3>
                 <p><?= $produit['description'] ?></p>
                 <p><?= $produit['prix'] ?> €</p>
-                <a href="produit.php?id=<?= $produit['id'] ?>">Voir le produit</a>
-                <form action="ajouter_panier.php">
+                <!-- ✅ Lien pour voir la page produit -->
+                <a href="produit.php?id=<?= $produit['id'] ?> class='btn-view'">Voir le produit</a><br>
+
+                <!-- ✅ Formulaire pour ajouter au panier -->
+                <form method="post" action="ajouter_panier.php">
                     <input type="hidden" name="id" value="<?= $produit['id'] ?>">
-                    <input type="submit" value="Ajouter au panier">
+                    <button type="submit">Ajouter au panier</button>
                 </form>
             </div><br>
         <?php endforeach; ?>
