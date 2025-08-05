@@ -32,8 +32,11 @@
         $panier[$ajoutProduit]['quantite'] += $quantite;
     } else {
         $panier[$ajoutProduit] = [
+            'id' => $produit['id'],
+            'image' => $produit['img_url'],
             'nom' => $produit['nom'],
             'prix' => $produit['prix'],
+            'description' => $produit['description'],
             'quantite' => $quantite
         ];
     }
