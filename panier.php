@@ -1,6 +1,6 @@
 <?php
+require_once 'includes/config.php';
 require_once BASE_URL . 'includes/pdo.php';
-require_once BASE_URL . 'includes/config.php';
 
 $panier = $_SESSION['panier'] ?? [];
 
@@ -22,7 +22,7 @@ $panier = $_SESSION['panier'] ?? [];
     //else = h1.Votre panier est vide + a.boutique
     ?>
     <h1>Panier</h1>
-    <?php if (isset($panier) && !empty($panier)): ?>
+    <?php if (!empty($panier)): ?>
         <?php foreach ($panier as $produit): ?>
             <div class="produit">
                 <a href="produit.php?id=<?= $produit['id'] ?>" class="btn-view">
@@ -30,7 +30,9 @@ $panier = $_SESSION['panier'] ?? [];
                 </a>
                 <h3><?= $produit['nom'] ?></h3>
                 <p><?= $produit['description'] ?></p>
-                <p><?= $produit['prix'] * $produit['quantite'] ?> €</p>
+                <p>Quantité: <?= $produit['quantite'] ?></p>
+                <p>Prix unitaire: <?= $produit['prix'] ?> €</p>
+                <p>Prix total: <?= $produit['prix'] * $produit['quantite'] ?> €</p>
                 <!-- ✅ Lien pour voir la page produit -->
                 <a href="produit.php?id=<?= $produit['id'] ?>" class="btn-view">Voir le produit</a><br>
 
@@ -49,7 +51,7 @@ $panier = $_SESSION['panier'] ?? [];
         ?>
         <article>
             <form method="post" action="paiement.php">
-                <input type="hidden" name="prix_panier" value="<?= $prixPanier ?>">
+                <input type="hidden" name="prix_panier" value="<?= $prixPanier ?>">                
                 <button type="submit">Payer</button>
             </form>
         </article>

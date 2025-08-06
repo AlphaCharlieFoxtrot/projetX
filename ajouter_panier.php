@@ -46,6 +46,6 @@
     $_SESSION['panier'] = $panier;
 
     // 🔹 Redirection vers le panier
-    header('Location: panier.php');
+    header('Location: boutique.php');
     exit;
 ?>

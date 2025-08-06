@@ -3,6 +3,7 @@
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="boutique.php">Boutique</a></li>
+            <li><a href="panier.php">Panier</a></li>
         </ul>
     </nav>
     <?php if (isset($_SESSION['user'])) : ?>

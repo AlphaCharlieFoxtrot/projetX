@@ -1,6 +1,6 @@
 <?php
-require_once('includes/pdo.php');
-require_once('includes/config.php');
+require_once 'includes/pdo.php';
+require_once 'includes/config.php';
 
 $produitId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -44,9 +44,9 @@ $produitSimilaire = $similarStmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="product-gallery">
                 <!--
                 <div class="thumbnails">
-                    <img src="<?= $produit['img_url'] ?>" alt="Miniature 1">
-                    <img src="<?= $produit['img_url'] ?>" alt="Miniature 2">
-                    <img src="<?= $produit['img_url'] ?>" alt="Miniature 3">
+                    <img src="<?= htmlspecialchars($produit['img_url']) ?>" alt="Miniature 1">
+                    <img src="<?= htmlspecialchars($produit['img_url']) ?>" alt="Miniature 2">
+                    <img src="<?= htmlspecialchars($produit['img_url']) ?>" alt="Miniature 3">
                 </div>-->
                 <div class="main-image">
                     <img src="<?= $produit['img_url'] ?>" alt="Nom du produit">
@@ -89,7 +89,10 @@ $produitSimilaire = $similarStmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="hidden" name="id" value="<?= $produitId ?>">
                     <input type="number" name="quantite" value="1" min="1" max="100" class="product-quantity">
                     <button type="submit" class="btn-add-to-cart">Ajouter au panier</button>
-                    <button type="button" class="btn-buy-now">Acheter maintenant</button>
+                </form>
+                <form method="post" action="paiement.php">
+                    <input type="hidden" name="prix_produit" value="<?= $produit['prix'] ?>">
+                    <button type="submit">Payer directement</button>
                 </form>
 
                 <!-- ✅ Infos supp -->
@@ -115,7 +118,8 @@ $produitSimilaire = $similarStmt->fetchAll(PDO::FETCH_ASSOC);
                     </div><br>
                 <?php endforeach; ?>
                 <?php if (count($produitSimilaire) === 5): ?>
-                    <br><div class="related-item more">
+                    <br>
+                    <div class="related-item more">
                         <a href="boutique.php?categorie=<?= urlencode($produit['categorie']) ?>">Voir +</a>
                     </div>
                 <?php endif; ?>
